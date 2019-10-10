@@ -82,11 +82,11 @@ class Program
 
                 Task.Run(() =>
                 {
-                    lastBraziliex = braziliex.getLastValue("BTC_BRL");
+                    lastBraziliex = braziliex.getLastValue("USDT_BRL");
                 });
                 Task.Run(() =>
                 {
-                    lastBitrecife = bitrecife.getLastValue("BTC_BRL");
+                    lastBitrecife = bitrecife.getLastValue("USDT_BRL");
                 });
 
                 i = 0;
@@ -109,11 +109,11 @@ class Program
 
                 Task.Run(() =>
                 {
-                    buy = braziliex.getLowestAsk("BTC_BRL", lessPercent(hand, braziliex.getFee()));
+                    buy = braziliex.getLowestAsk("USDT_BRL", lessPercent(hand, braziliex.getFee()));
                 });
                 Task.Run(() =>
                 {
-                    sell = bitrecife.getHighestBid("BTC_BRL", morePercent(hand, bitrecife.getFee()) + 0.01m);
+                    sell = bitrecife.getHighestBid("USDT_BRL", morePercent(hand, bitrecife.getFee()) + 0.01m);
                 });
 
 
@@ -135,18 +135,18 @@ class Program
                 {
                     if (braziliex.getBalance("BRL") > morePercent(hand, 1))
                     {
-                        if (bitrecife.getBalance("BTC") > morePercent(sell[0], 1))
+                        if (bitrecife.getBalance("USDT") > morePercent(sell[0], 1))
                         {
 
                             if (perc >= percentProfit)
                             {
                                 Task.Run(() =>
                                 {
-                                    braziliex.order("buy", "BTC_BRL", Math.Round(buy[0] - ((buy[0] - sell[0])/2),8) , morePercent(lastBraziliex, 10));
+                                    braziliex.order("buy", "USDT_BRL", Math.Round(buy[0] - ((buy[0] - sell[0])/2),8) , morePercent(lastBraziliex, 10));
                                 });
                                 Task.Run(() =>
                                 {
-                                    bitrecife.order("sell", "BTC_BRL", Math.Round(sell[0],8), lessPercent(lastBitrecife, 10));
+                                    bitrecife.order("sell", "USDT_BRL", Math.Round(sell[0],8), lessPercent(lastBitrecife, 10));
                                 });
 
 
@@ -181,11 +181,11 @@ class Program
 
                 Task.Run(() =>
                 {
-                    buy = bitrecife.getLowestAsk("BTC_BRL", lessPercent(hand, bitrecife.getFee()) + 0.01m);
+                    buy = bitrecife.getLowestAsk("USDT_BRL", lessPercent(hand, bitrecife.getFee()) + 0.01m);
                 });
                 Task.Run(() =>
                 {
-                    sell = braziliex.getHighestBid("BTC_BRL", lessPercent(hand, braziliex.getFee()));
+                    sell = braziliex.getHighestBid("USDT_BRL", lessPercent(hand, braziliex.getFee()));
                 });
 
 
@@ -206,18 +206,18 @@ class Program
                 {
                     if (bitrecife.getBalance("BRL") > morePercent(hand, 1))
                     {
-                        if (braziliex.getBalance("BTC") > morePercent(sell[0], 1))
+                        if (braziliex.getBalance("USDT") > morePercent(sell[0], 1))
                         {
 
                             if (perc >= percentProfit)
                             {
                                 Task.Run(() =>
                                 {
-                                    bitrecife.order("buy", "BTC_BRL", Math.Round( buy[0] - ((buy[0] - sell[0])/2),8), morePercent(lastBitrecife, 10));
+                                    bitrecife.order("buy", "USDT_BRL", Math.Round( buy[0] - ((buy[0] - sell[0])/2),8), morePercent(lastBitrecife, 10));
                                 });
                                 Task.Run(() =>
                                 {
-                                    braziliex.order("sell", "BTC_BRL", Math.Round(sell[0],8), lessPercent(lastBraziliex, 10));
+                                    braziliex.order("sell", "USDT_BRL", Math.Round(sell[0],8), lessPercent(lastBraziliex, 10));
                                 });
 
 
@@ -252,13 +252,13 @@ class Program
 
 
             Logger.log("TOTAL BRL: R$ " + (bitrecife.getBalance("BRL") + braziliex.getBalance("BRL")));
-            Logger.log("TOTAL BTC:    " + (bitrecife.getBalance("BTC") + braziliex.getBalance("BTC")) + " BTC");
+            Logger.log("TOTAL USDT:    " + (bitrecife.getBalance("USDT") + braziliex.getBalance("USDT")) + " USDT");
 
             Logger.log("TOTAL BRL(BITRECIFE): R$ " + (bitrecife.getBalance("BRL") ));
-            Logger.log("TOTAL BTC(BITRECIFE):    " + (bitrecife.getBalance("BTC")) + " BTC");
+            Logger.log("TOTAL USDT(BITRECIFE):    " + (bitrecife.getBalance("USDT")) + " USDT");
 
             Logger.log("TOTAL BRL(BRAZILIEX): R$ " + (braziliex.getBalance("BRL")));
-            Logger.log("TOTAL BTC(BRAZILIEX):    " + (braziliex.getBalance("BTC")) + " BTC");
+            Logger.log("TOTAL USDT(BRAZILIEX):    " + (braziliex.getBalance("USDT")) + " USDT");
 
             Logger.log("");
             Logger.log("");

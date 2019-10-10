@@ -39,8 +39,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="jose-jwt">
-      <HintPath>..\MoneyMachineConsole-master\packages\jose-jwt.2.4.0\lib\net461\jose-jwt.dll</HintPath>
+    <Reference Include="jose-jwt, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\jose-jwt.2.4.0\lib\net461\jose-jwt.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -68,12 +68,13 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization.Json" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="TA-Lib-Core">
-      <HintPath>..\powerpump\Bin\TA-Lib-Core.dll</HintPath>
+    <Reference Include="TA-Lib-Core, Version=1.0.6380.29818, Culture=neutral, PublicKeyToken=fdb2a6b268f56aa5, processorArchitecture=MSIL">
+      <HintPath>packages\Cryptowatcher.TA-LIb-Core.1.0.0\lib\netstandard1.6\TA-Lib-Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

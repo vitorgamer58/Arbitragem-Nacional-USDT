@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 public class ExchangeBraziliex : ExchangeBase, IExchange
 {
     public decimal balance_brl = 0;
-    public decimal balance_btc = 0;
+    public decimal balance_usdt = 0;
 
     public ExchangeBraziliex()
     {
@@ -48,7 +48,7 @@ public class ExchangeBraziliex : ExchangeBase, IExchange
         String json = post("https://braziliex.com/api/v1/private", "command=balance", this.key, this.secret);
         JContainer jContainer = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
-        balance_btc = decimal.Parse(jContainer["balance"]["btc"].ToString().Replace(".", ","));
+        balance_usdt = decimal.Parse(jContainer["balance"]["usdt"].ToString().Replace(".", ","));
         balance_brl = decimal.Parse(jContainer["balance"]["brl"].ToString().Replace(".", ","));
 
         return json;
@@ -59,7 +59,7 @@ public class ExchangeBraziliex : ExchangeBase, IExchange
 
         try
         {
-            String json = Http.get("https://braziliex.com/api/v1/public/ticker/btc_brl");
+            String json = Http.get("https://braziliex.com/api/v1/public/ticker/usdt_brl");
 
             JContainer j = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
@@ -77,7 +77,7 @@ public class ExchangeBraziliex : ExchangeBase, IExchange
         try
         {
 
-            pair = "btc_brl";
+            pair = "usdt_brl";
             String json = Http.get("https://braziliex.com/api/v1/public/orderbook/" + pair);
             JContainer jCointaner = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
@@ -128,7 +128,7 @@ public class ExchangeBraziliex : ExchangeBase, IExchange
         try
         {
 
-            pair = "btc_brl";
+            pair = "usdt_brl";
             String json = Http.get("https://braziliex.com/api/v1/public/orderbook/" + pair);
             JContainer jCointaner = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
@@ -249,8 +249,8 @@ public class ExchangeBraziliex : ExchangeBase, IExchange
     {
         if (pair == "BRL")
             return balance_brl;
-        if (pair == "BTC")
-            return balance_btc;
+        if (pair == "USDT")
+            return balance_usdt;
 
         return 0m;
     }

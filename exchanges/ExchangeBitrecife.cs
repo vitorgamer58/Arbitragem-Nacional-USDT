@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 public class ExchangeBitrecife : ExchangeBase, IExchange
 {
     public decimal balance_brl = 0;
-    public decimal balance_btc = 0;
+    public decimal balance_usdt = 0;
 
     public ExchangeBitrecife()
     {
@@ -49,7 +49,7 @@ public class ExchangeBitrecife : ExchangeBase, IExchange
         JContainer jContainer = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
         balance_brl = decimal.Parse(jContainer["result"][0]["Balance"].ToString().Replace(".", ","));
-        balance_btc = decimal.Parse(jContainer["result"][1]["Balance"].ToString().Replace(".", ","));
+        balance_usdt = decimal.Parse(jContainer["result"][1]["Balance"].ToString().Replace(".", ","));
 
         return json;
     }
@@ -59,7 +59,7 @@ public class ExchangeBitrecife : ExchangeBase, IExchange
 
         try
         {
-            String json = Http.get("https://exchange.bitrecife.com.br/api/v3/public/getticker?market=BTC_BRL");
+            String json = Http.get("https://exchange.bitrecife.com.br/api/v3/public/getticker?market=USDT_BRL");
 
             JContainer j = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
@@ -76,7 +76,7 @@ public class ExchangeBitrecife : ExchangeBase, IExchange
     {
         try
         {
-            String json = Http.get("https://exchange.bitrecife.com.br/api/v3/public/getorderbook?market=BTC_BRL&type=SELL&depth=2000");
+            String json = Http.get("https://exchange.bitrecife.com.br/api/v3/public/getorderbook?market=USDT_BRL&type=SELL&depth=2000");
             JContainer jCointaner = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
             decimal[] arrayValue = new decimal[2];
@@ -122,8 +122,8 @@ public class ExchangeBitrecife : ExchangeBase, IExchange
         try
         {
 
-            pair = "btc_brl";
-            String json = Http.get("https://exchange.bitrecife.com.br/api/v3/public/getorderbook?market=BTC_BRL&type=BUY&depth=2000");
+            pair = "usdt_brl";
+            String json = Http.get("https://exchange.bitrecife.com.br/api/v3/public/getorderbook?market=USDT_BRL&type=BUY&depth=2000");
             JContainer jCointaner = (JContainer)JsonConvert.DeserializeObject(json, (typeof(JContainer)));
 
 
@@ -238,7 +238,7 @@ public class ExchangeBitrecife : ExchangeBase, IExchange
         if (pair == "BRL")
             return balance_brl;
         if (pair == "BTC")
-            return balance_btc;
+            return balance_usdt;
 
         return 0m;
     }
